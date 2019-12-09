@@ -188,11 +188,11 @@ namespace Sora.RTC
                 Logger.Debug("PeerChannel", "Close - already closed");
                 return;
             }
-
-            _ = CloseInternal(false);
+            
+            CloseInternal(false);
         }
 
-        async Task CloseInternal(bool delay)
+        void CloseInternal(bool delay)
         {
             Logger.Debug("PeerChannel", "CloseInternal");
 
@@ -204,23 +204,20 @@ namespace Sora.RTC
 
             closed = true;
 
-            if (delay)
-            {
-                // PeerConnectionのIceConnectionStateChangeイベントから呼び出す場合は
-                // PeerConnection内部の続きの処理が終わってから 
-                // PeerConnectionを解放する必要がある
-                await Task.Delay(1); 
-            }
+            Task.Run(() => { 
 
-            screen?.Dispose();
+                screen?.Dispose();
 
-            ClosePeer();
+                ClosePeer();
 
-            factory?.Dispose();
+                factory?.Dispose();
 
-            OnClose?.Invoke();
+                OnClose?.Invoke();
 
-            GC.Collect();
+                GC.Collect();
+
+            });
+
         }
 
         void CreateFactory()
@@ -350,12 +347,7 @@ namespace Sora.RTC
 
             Logger.Debug("PeerChannel", "add video track");
 
-            //Conn.AddTrack(track);
-            var init = new RTCRtpTransceiverInit
-            {
-                Direction = RTCRtpTransceiverDirection.Sendonly
-            };
-            Conn.AddTransceiver(track, init);
+            Conn.AddTrack(track);
 
             Logger.Debug("PeerChannel", "add track");
 
@@ -382,12 +374,7 @@ namespace Sora.RTC
 
             Logger.Debug("PeerChannel", "add audio track");
 
-            var init = new RTCRtpTransceiverInit
-            {
-                Direction = RTCRtpTransceiverDirection.Sendonly
-            };
-            Conn.AddTransceiver(track, init);
-            //Conn.AddTrack(track);
+            Conn.AddTrack(track);
 
             OnAddLocalAudioTrack?.Invoke(track);
         }
@@ -447,7 +434,7 @@ namespace Sora.RTC
                     break;
                 case RTCIceConnectionState.Disconnected:
                 case RTCIceConnectionState.Closed:
-                    _ = CloseInternal(true);
+                    CloseInternal(true);
                     break;
                 default:
                     break;

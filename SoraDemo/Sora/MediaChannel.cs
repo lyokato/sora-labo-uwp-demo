@@ -41,11 +41,9 @@ namespace Sora
 
         IMediaStreamTrack localAudioTrack = null;
         IMediaStreamTrack localVideoTrack = null;
-
-        RemoteMediaTracksHolder remoteTracksHolder =
+        readonly RemoteMediaTracksHolder remoteTracksHolder =
             new RemoteMediaTracksHolder();
-
-        StreamIdChecker streamIdChecker = new StreamIdChecker();
+        readonly StreamIdChecker streamIdChecker = new StreamIdChecker();
 
         public int TimeoutMs { get; set; } = 15000; // 15 seconds
 

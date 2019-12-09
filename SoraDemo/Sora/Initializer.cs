@@ -34,13 +34,15 @@ namespace Sora
         {
             Logger.Debug("Initializer", "SetpRTC");
             var queue = EventQueueMaker.Bind(dispatcher);
-            var conf = new WebRtcLibConfiguration();
-            conf.Queue = queue;
-            conf.AudioCaptureFrameProcessingQueue = EventQueue.GetOrCreateThreadQueueByName("AudioCaptureProcessingQueue");
-            conf.AudioRenderFrameProcessingQueue = EventQueue.GetOrCreateThreadQueueByName("AudioRenderProcessingQueue");
-            conf.VideoFrameProcessingQueue = EventQueue.GetOrCreateThreadQueueByName("VideoFrameProcessingQueue");
-            conf.CustomAudioQueue = EventQueue.GetOrCreateThreadQueueByName("CustomAudioQueue");
-            conf.CustomVideoQueue = EventQueue.GetOrCreateThreadQueueByName("CustomVideoQueue");
+            var conf = new WebRtcLibConfiguration
+            {
+                Queue = queue,
+                AudioCaptureFrameProcessingQueue = EventQueue.GetOrCreateThreadQueueByName("AudioCaptureProcessingQueue"),
+                AudioRenderFrameProcessingQueue = EventQueue.GetOrCreateThreadQueueByName("AudioRenderProcessingQueue"),
+                VideoFrameProcessingQueue = EventQueue.GetOrCreateThreadQueueByName("VideoFrameProcessingQueue"),
+                CustomAudioQueue = EventQueue.GetOrCreateThreadQueueByName("CustomAudioQueue"),
+                CustomVideoQueue = EventQueue.GetOrCreateThreadQueueByName("CustomVideoQueue")
+            };
             WebRtcLib.Setup(conf);
         }
     }

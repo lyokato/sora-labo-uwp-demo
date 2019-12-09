@@ -37,6 +37,7 @@ namespace Sora.Device
 
         public CustomVideoCapturerFactory CreateCapturerFactory()
         {
+            Logger.Debug("Screen", "CreateCaptureFactory");
             var factory = CustomVideoCapturerFactory.Cast(CustomVideoCapturerFactory.Create());
             factory.OnCreateCustomVideoCapturer += VideoCapturerFactory_OnCreateCustomVideoCapturer;
             return factory;
@@ -44,6 +45,7 @@ namespace Sora.Device
 
         private void VideoCapturerFactory_OnCreateCustomVideoCapturer(ICustomVideoCapturerCreateEvent ev)
         {
+            Logger.Debug("Screen", "OnCreateCustomVideoCapture");
             var parameters = new CustomVideoCapturerParameters();
             customVideoCapturer = CustomVideoCapturer.Cast(CustomVideoCapturer.Create(parameters));
             ev.CreatedCapturer = customVideoCapturer;
@@ -51,6 +53,7 @@ namespace Sora.Device
 
         public async Task StartCaptureAsync()
         {
+            Logger.Debug("Screen", "StartCaptureAsync");
             await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () => {
                 await StartCaptureAsyncInternal();
             });
@@ -63,6 +66,8 @@ namespace Sora.Device
 
         public void StopCapture()
         {
+            Logger.Debug("Screen", "StopCapture");
+            // TODO cause dead lock?
             dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
                 StopCaptureInternal();
             }).AsTask().Wait();
@@ -70,6 +75,8 @@ namespace Sora.Device
 
         public void StopCaptureInternal()
         {
+            Logger.Debug("Screen", "StopCaptureInternal");
+
             if (item != null)
             {
                 framePool.FrameArrived -= FramePool_FrameArrived;
@@ -91,6 +98,8 @@ namespace Sora.Device
 
         public async Task StartCaptureAsyncInternal()
         {
+            Logger.Debug("Screen", "StartCaptureAsyncInternal");
+
             var picker = new GraphicsCapturePicker();
             GraphicsCaptureItem item = await picker.PickSingleItemAsync();
 
@@ -129,6 +138,8 @@ namespace Sora.Device
 
         private Task CreateScreenCaptureTask()
         {
+            Logger.Debug("Screen", "CreateScreenCaptureTask");
+
             return new Task(() => {
                 if (null == customVideoCapturer)
                 {
@@ -209,6 +220,7 @@ namespace Sora.Device
 
         private void ResetFramePool(SizeInt32 size, bool recreateDevice)
         {
+            Logger.Debug("Screen", "ResetFramePool");
             do
             {
                 try
