@@ -1,4 +1,4 @@
-# [WIP] Sora Labo UWP Desktop Application Demo
+# [WIP] Sora Labo UWP Application Demo
 
 ## DESCRIPTION
 
