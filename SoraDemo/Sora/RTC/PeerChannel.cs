@@ -234,7 +234,7 @@ namespace Sora.RTC
                 if (mediaOption.AudioUpstreamEnabled)
                 {
                     Logger.Debug("PeerChannel", $"audio upstream setting found, set device id: {mediaOption.MicrophoneDevice.Id}");
-                    //factoryConf.AudioCaptureDeviceId = mediaOption.MicrophoneDevice.Id;
+                    factoryConf.AudioCaptureDeviceId = mediaOption.MicrophoneDevice.Id;
                     //factoryConf.AudioRenderingEnabled = true;
                 }
                 else
