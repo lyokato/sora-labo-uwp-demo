@@ -1,0 +1,184 @@
+﻿<Page
+    x:Class="SoraDemo.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SoraDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+	Width="800"
+	Height="600">
+
+	<Page.Background>
+		<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+			<GradientStop Color="#112233" Offset="0.0"/>
+			<GradientStop Color="#224466" Offset="1.0"/>
+		</LinearGradientBrush>
+	</Page.Background>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="300" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+        <StackPanel Name="settingPanel"
+						Grid.Column="0"
+						Padding="20"
+						Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+
+            <TextBox Header="Channel Name"
+				         Name="channelNameInput"
+						 Text="{Binding ChannelId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+						 PlaceholderText="Input channel name "
+						 Margin="10"/>
+
+
+            <CheckBox Content="VideoSend"
+					 	  Name="videoSendCheckBox"
+						  IsChecked="{Binding VideoUpstreamEnabled,Mode=TwoWay}"
+						  Margin="10,0,0,0"/>
+
+				<TextBlock Text="VideoCapture Device/Format" Margin="10,0,0,4"/>
+				<ComboBox Name ="capabilitiesBox"
+						  ItemsSource="{Binding VideoCaptureCapabilities}"
+						  SelectedItem="{Binding SelectedVideoCaptureCapability,Mode=TwoWay}"
+						  Width="240"
+						  Margin="10,0,0,6">
+				</ComboBox>
+
+				<CheckBox Content="VideoRecv"
+					 	  Name="videoRecvCheckBox"
+						  IsChecked="{Binding VideoDownstreamEnabled,Mode=TwoWay}"
+						  Margin="10,0,0,0"/>
+
+				<TextBlock Text="VideoCodec"
+						   Margin="10,6,0,4"/>
+				<ComboBox Width="240"
+					 	  Name="videoCodecComboBox"
+					      ItemsSource="{Binding AvailableVideoCodecs}"
+						  SelectedItem="{Binding SelectedVideoCodec,Mode=TwoWay}"
+						  Margin="10,0,0,6">
+				</ComboBox>
+
+
+				<CheckBox Content="AudioSend"
+					 	  Name="audioSendCheckBox"
+						  IsChecked="{Binding AudioUpstreamEnabled,Mode=TwoWay}"
+						  Margin="10,0,0,0"/>
+				<ComboBox Name ="microphonesBox"
+						  ItemsSource="{Binding MicrophoneDevices}"
+						  SelectedItem="{Binding SelectedMicrophoneDevice,Mode=TwoWay}"
+						  Width="240"
+						  Margin="10,0,0,6">
+				</ComboBox>
+
+				<CheckBox Content="AudioRecv"
+					 	  Name="audioRecvCheckBox"
+						  IsChecked="{Binding AudioDownstreamEnabled,Mode=TwoWay}"
+						  Margin="10,0,0,0"/>
+				<ComboBox Name ="speakersBox"
+						  ItemsSource="{Binding SpeakerDevices}"
+						  SelectedItem="{Binding SelectedSpeakerDevice,Mode=TwoWay}"
+						  Width="240"
+						  Margin="10,0,0,6">
+				</ComboBox>
+
+				<TextBlock Text="AudioCodec" Margin="10,0,0,4"/>
+				<ComboBox Width="240"
+					      ItemsSource="{Binding AvailableAudioCodecs}"
+						  SelectedItem="{Binding SelectedAudioCodec,Mode=TwoWay}"
+					 	  Name="audioCodecComboBox"
+						  Margin="10,0,0,6">
+				</ComboBox>
+
+
+				<CheckBox Content="Multistream"
+					 	  Name="multistreamCheckBox"
+						  IsChecked="{Binding MultistreamEnabled,Mode=TwoWay}"
+						  Margin="10,0,0,0"/>
+
+			</StackPanel>
+
+			<Grid Grid.Column="1">
+
+				<Grid.RowDefinitions>
+					<RowDefinition Height="60"/>
+					<RowDefinition/>
+					<RowDefinition Height="180"/>
+				</Grid.RowDefinitions>
+
+				<Grid Grid.Row="0">
+					<TextBlock Text="Sora Labo Demo"
+							   FontSize="26"
+							   Foreground="White"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"/>
+				</Grid>
+
+
+				<StackPanel Grid.Row="1" Background="Black" Margin="20,0,20,0">
+				<MediaElement Name="remoteVideoView"
+							  RealTimePlayback="True"
+							  MediaFailed="RemoteVideo_MediaFailed"/>
+				</StackPanel>
+
+				<Grid Grid.Row="2"
+							Width="Auto">
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="180"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+
+					<StackPanel Margin="20" Grid.Column="0" Background="Black">
+						<MediaElement Name="localVideoView"
+							RealTimePlayback="True"
+							MediaFailed="LocalVideo_MediaFailed"/>
+					</StackPanel>
+
+					<Grid Grid.Column="1">
+
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0"
+									HorizontalAlignment="Right"
+									Foreground="White"
+									FontSize="24"
+									VerticalAlignment="Center"
+									Margin="0,0,40,0"
+									Text="{Binding StateText}" />
+
+						<StackPanel Grid.Row="1"
+									Orientation="Horizontal"
+									HorizontalAlignment="Right"
+									VerticalAlignment="Center">
+
+							<Button Content="START"
+									Name="startButton"
+									Width="140"
+									Foreground="White"
+									Background="DarkOrange"
+									Margin="10"
+								    Click="StartButton_OnClick"
+									IsEnabled="{Binding IsNotRunning}"/>
+
+							<Button Content="STOP"
+									Name="stopButton"
+									Width="140"
+									Foreground="White"
+									Background="DarkRed"
+									Margin="10,0,20,0"
+								    Click="StopButton_OnClick"
+									IsEnabled="{Binding IsRunning}"/>
+						</StackPanel>
+
+					</Grid>
+
+				</Grid>
+			</Grid>
+		</Grid>
+</Page>
