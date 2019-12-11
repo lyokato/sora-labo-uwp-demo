@@ -21,7 +21,6 @@ namespace Sora.Device
 
             foreach (var device in devices)
             {
-                Logger.Debug("MediaDevice", $"found {device.Name}");
                 var capabilities = await device.GetCpabilities();
                 results.AddRange(capabilities);
             }
@@ -183,7 +182,6 @@ namespace Sora.Device
                     var cap = CreateCapability(prop);
                     // 取得できるプロパティは重複することがあるので、
                     // いったんDictionaryに入れて重複キーをはじく
-                    Logger.Debug("MediaDevice", $"found capability {cap.DeviceId}:{cap}");
                     dict[cap.ToString()] = cap;
                 }
 

@@ -229,7 +229,7 @@ namespace Sora.RTC
                 Logger.Debug("PeerChannel", "factory not found, create it.");
 
                 var factoryConf = new WebRtcFactoryConfiguration();
-                // factoryConf.EnableAudioBufferEvents = true;
+                factoryConf.EnableAudioBufferEvents = false;
 
                 if (mediaOption.AudioUpstreamEnabled)
                 {

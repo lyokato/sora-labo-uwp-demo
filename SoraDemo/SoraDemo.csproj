@@ -150,7 +150,7 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.9</Version>
     </PackageReference>
-    <PackageReference Include="WebRTC">
+    <PackageReference Include="WebRtc">
       <Version>1.75.0.2-Alpha</Version>
     </PackageReference>
     <PackageReference Include="Win2D.uwp">

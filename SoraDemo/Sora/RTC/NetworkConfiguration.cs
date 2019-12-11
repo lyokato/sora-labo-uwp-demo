@@ -26,7 +26,7 @@ namespace Sora.RTC
                 EnableDtlsSrtp           = true,
                 SdpSemantics             = RTCSdpSemantics.UnifiedPlan,
                 TcpCandidatePolicy       = mediaOption.TcpCandidatePolicy,
-                // EnableIceRenomination    = true,
+                EnableIceRenomination    = true,
             };
 
             if (serverConfig.IceTransportPolicy == "relay")

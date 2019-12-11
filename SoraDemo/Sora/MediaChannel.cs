@@ -87,6 +87,9 @@ namespace Sora
                 Logger.Debug("MediaChannel", "already closed");
                 return;
             }
+
+            Logger.StartMediaTrace();
+
             mediaOption.DumpLog();
             StartPeerWithClientOffer();
             StartNegotiationTimer();
@@ -110,8 +113,11 @@ namespace Sora
 
             Logger.Debug("MediaChannel", "try to close peer");
 
+
             CloseTempPeer();
             ClosePeer();
+
+            Logger.StopMediaTrace();
 
             Logger.Debug("MediaChannel", "peer closed");
 
