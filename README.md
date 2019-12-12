@@ -25,6 +25,15 @@ sora-android-sdk-samplesアプリを相手にmultistreamのビデオ送受信を
 - spotlight対応
 - 多人数同時通信のアプリケーションサンプル
 
+## 環境
+
+- VS2019
+
+### 依存(nuget packages)
+
+- WebRTC 1.75.0.2-Alpha (安定版の1.71はM71相当になってしまうため、M75相当の1.75アルファを利用)
+- Win2D 1.24.0 (スクリーンキャストに利用)
+
 ## 既知の問題
 
 - 音の受信の設定を入れると、Answerを作ってSetLocalDescriptionに突っ込むとデッドロックが発生して固まる?
