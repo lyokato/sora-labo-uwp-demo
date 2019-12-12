@@ -1,14 +1,14 @@
 # Sora Labo UWP Application Demo
 
-## DESCRIPTION
+## 概要
 
 [Sora Labo](https://sora-labo.shiguredo.jp/)用のUWPデスクトップアプリの実験用デモ
 
-## USAGE
+## 利用法
 
 Config.csで正しいアカウント名とシグナリングキーを記入してビルド
 
-### 完成
+### 利用可能な機能
 
 - multi-streamによる動画の送受信(音声は現状NG。下記の問題のため)
 - single-streamによる、動画、音声の送信
