@@ -135,6 +135,17 @@ namespace SoraDemo.ViewModels
             }
         }
 
+        private bool _recordingEnabled = false;
+        public bool RecordingEnabled
+        {
+            get { return _recordingEnabled; }
+            set
+            {
+                _recordingEnabled = value;
+                OnPropertyChanged(nameof(RecordingEnabled));
+            }
+        }
+
         private bool _videoUpstreamEnabled = true;
         public bool VideoUpstreamEnabled
         {
@@ -355,7 +366,8 @@ namespace SoraDemo.ViewModels
             var metadata =
                 new Sora.Signaling.Metadata()
                 {
-                    SignalingKey = Config.SoraLaboSignalingKey
+                    SignalingKey = Config.SoraLaboSignalingKey,
+                    Recording    = _recordingEnabled
                 };
 
             var channelId = $"{Config.SoraLaboUsername}@{ChannelId}";
@@ -367,8 +379,12 @@ namespace SoraDemo.ViewModels
             mediaOption.EnableMediaTrace = false;
 
             mediaChannel = 
-                new Sora.MediaChannel(Config.SoraLaboEndpoint, channelId, 
-                    metadata, mediaOption);
+                new Sora.MediaChannel(
+                    Config.SoraLaboEndpoint, 
+                    channelId, 
+                    metadata, 
+                    mediaOption // TODO コピーして渡すようにする
+                );
 
             mediaChannel.OnConnect                += Channel_OnConnect;
             mediaChannel.OnDisconnect             += Channel_OnDisconnect;

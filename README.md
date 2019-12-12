@@ -14,6 +14,7 @@ Config.csで正しいアカウント名とシグナリングキーを記入し�
 - single-streamによる、動画、音声の送信
 - single-streamによる、動画の受信(音声は現状NG, 下記の問題のため)
 - 動画送信時のスクリーンキャスト
+- レコーディング機能
 
 sora-android-sdk-samplesアプリを相手にmultistreamのビデオ送受信を行っている時のスクリーンショット
 

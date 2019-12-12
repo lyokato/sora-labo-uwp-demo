@@ -8,7 +8,6 @@ namespace SoraDemo
         public static readonly string SoraLaboSignalingKey = "";
         public static readonly string SoraLaboUsername = "";
     }
-
 }
 
 namespace Sora.Signaling
@@ -17,6 +16,9 @@ namespace Sora.Signaling
     {
         [DataMember(Name = "signaling_key")]
         public string SignalingKey { get; set; } = "";
+
+        [DataMember(Name = "recording")]
+        public bool Recording { get; set; } = false;
     }
 
 }

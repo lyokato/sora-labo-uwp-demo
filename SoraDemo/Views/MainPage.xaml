@@ -98,6 +98,11 @@
 						  IsChecked="{Binding MultistreamEnabled,Mode=TwoWay}"
 						  Margin="10,0,0,0"/>
 
+				<CheckBox Content="Recording"
+					 	  Name="recordingCheckBox"
+						  IsChecked="{Binding RecordingEnabled,Mode=TwoWay}"
+						  Margin="10,0,0,0"/>
+
 			</StackPanel>
 
 			<Grid Grid.Column="1">
