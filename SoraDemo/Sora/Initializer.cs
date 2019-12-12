@@ -42,7 +42,6 @@ namespace Sora
                 VideoFrameProcessingQueue = EventQueue.GetOrCreateThreadQueueByName("VideoFrameProcessingQueue"),
                 CustomAudioQueue = EventQueue.GetOrCreateThreadQueueByName("CustomAudioQueue"),
                 CustomVideoQueue = EventQueue.GetOrCreateThreadQueueByName("CustomVideoQueue"),
-                //SdpProcessingQueue = EventQueue.GetOrCreateThreadQueueByName("SdpProcessingQueue")
             };
             WebRtcLib.Setup(conf);
         }

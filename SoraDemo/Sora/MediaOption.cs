@@ -141,6 +141,8 @@ namespace Sora
             }
         }
 
+        public bool EnableMediaTrace { get; set; } = false;
+
         public bool EnableMRC { get; private set; } = false;
 
         public void DumpLog()

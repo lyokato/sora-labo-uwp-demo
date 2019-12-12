@@ -364,6 +364,8 @@ namespace SoraDemo.ViewModels
             mediaOption.MicrophoneDevice = _audioUpstreamEnabled ? _selectedMicrophoneDevice : null;
             mediaOption.VideoCaptureCapability = _videoUpstreamEnabled ? _selectedVideoCaptureCapability : null;
 
+            mediaOption.EnableMediaTrace = false;
+
             mediaChannel = 
                 new Sora.MediaChannel(Config.SoraLaboEndpoint, channelId, 
                     metadata, mediaOption);

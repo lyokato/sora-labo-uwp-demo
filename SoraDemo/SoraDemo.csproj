@@ -99,6 +99,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="Sora\Device\Screen.cs" />
     <Compile Include="Sora\Device\VersionInfo.cs" />
+    <Compile Include="Sora\RTCMediaTracer.cs" />
     <Compile Include="Sora\SDK.cs" />
     <Compile Include="Sora\StreamIdChecker.cs" />
     <Compile Include="ViewModels\MediaChannelViewModel.cs" />

@@ -88,7 +88,10 @@ namespace Sora
                 return;
             }
 
-            Logger.StartMediaTrace();
+            if (mediaOption.EnableMediaTrace)
+            {
+                RTCMediaTracer.Start();
+            }
 
             mediaOption.DumpLog();
             StartPeerWithClientOffer();
@@ -117,7 +120,10 @@ namespace Sora
             CloseTempPeer();
             ClosePeer();
 
-            Logger.StopMediaTrace();
+            if (mediaOption.EnableMediaTrace)
+            {
+                RTCMediaTracer.Stop();
+            }
 
             Logger.Debug("MediaChannel", "peer closed");
 

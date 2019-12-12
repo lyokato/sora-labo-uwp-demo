@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Core;
 
@@ -220,7 +222,7 @@ namespace Sora.RTC
 
         }
 
-        void CreateFactory()
+        void SetupFactory()
         {
             Logger.Debug("PeerChannel", "CreateFactory");
 
@@ -228,8 +230,10 @@ namespace Sora.RTC
             {
                 Logger.Debug("PeerChannel", "factory not found, create it.");
 
-                var factoryConf = new WebRtcFactoryConfiguration();
-                factoryConf.EnableAudioBufferEvents = false;
+                var factoryConf = new WebRtcFactoryConfiguration
+                {
+                    EnableAudioBufferEvents = false
+                };
 
                 if (mediaOption.AudioUpstreamEnabled)
                 {
@@ -295,12 +299,14 @@ namespace Sora.RTC
                 this.screen = new Device.Screen(dispatcher);
             }
 
-            CreateFactory();
+            SetupFactory();
 
             rtcConf.Factory = factory;
 
             Logger.Debug("PeerChannel", "create PeerConnection");
+
             Conn = new RTCPeerConnection(rtcConf);
+
             if (Conn == null)
             {
                 Logger.Debug("PeerChannel", "failed to create PeerConnection");
